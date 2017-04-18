@@ -16,6 +16,8 @@
 
 package android.support.design.internal;
 
+import static android.support.annotation.RestrictTo.Scope.GROUP_ID;
+
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
@@ -131,8 +133,6 @@ public class BottomNavigationItemView extends FrameLayout implements MenuView.It
 
     @Override
     public void setChecked(boolean checked) {
-        mItemData.setChecked(checked);
-
         ViewCompat.setPivotX(mLargeLabel, mLargeLabel.getWidth() / 2);
         ViewCompat.setPivotY(mLargeLabel, mLargeLabel.getBaseline());
         ViewCompat.setPivotX(mSmallLabel, mSmallLabel.getWidth() / 2);

@@ -16,6 +16,8 @@
 
 package android.support.v7.view.menu;
 
+import static android.support.annotation.RestrictTo.Scope.GROUP_ID;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -164,6 +166,8 @@ public class MenuBuilder implements SupportMenu {
     private boolean mPreventDispatchingItemsChanged = false;
 
     private boolean mItemsChangedWhileDispatchPrevented = false;
+
+    private boolean mStructureChangedWhileDispatchPrevented = false;
 
     private boolean mOptionalIconsVisible = false;
 
@@ -582,6 +586,7 @@ public class MenuBuilder implements SupportMenu {
         clearHeader();
         mPreventDispatchingItemsChanged = false;
         mItemsChangedWhileDispatchPrevented = false;
+        mStructureChangedWhileDispatchPrevented = false;
         onItemsChanged(true);
     }
 
@@ -599,6 +604,7 @@ public class MenuBuilder implements SupportMenu {
         final int group = item.getGroupId();
 
         final int N = mItems.size();
+        stopDispatchingItemsChanged();
         for (int i = 0; i < N; i++) {
             MenuItemImpl curItem = mItems.get(i);
             if (curItem.getGroupId() == group) {
@@ -609,6 +615,7 @@ public class MenuBuilder implements SupportMenu {
                 curItem.setCheckedInt(curItem == item);
             }
         }
+        startDispatchingItemsChanged();
     }
 
     @Override
@@ -1042,6 +1049,9 @@ public class MenuBuilder implements SupportMenu {
             dispatchPresenterUpdate(structureChanged);
         } else {
             mItemsChangedWhileDispatchPrevented = true;
+            if (structureChanged) {
+                mStructureChangedWhileDispatchPrevented = true;
+            }
         }
     }
 
@@ -1054,6 +1064,7 @@ public class MenuBuilder implements SupportMenu {
         if (!mPreventDispatchingItemsChanged) {
             mPreventDispatchingItemsChanged = true;
             mItemsChangedWhileDispatchPrevented = false;
+            mStructureChangedWhileDispatchPrevented = false;
         }
     }
 
@@ -1062,7 +1073,7 @@ public class MenuBuilder implements SupportMenu {
 
         if (mItemsChangedWhileDispatchPrevented) {
             mItemsChangedWhileDispatchPrevented = false;
-            onItemsChanged(true);
+            onItemsChanged(mStructureChangedWhileDispatchPrevented);
         }
     }
 
