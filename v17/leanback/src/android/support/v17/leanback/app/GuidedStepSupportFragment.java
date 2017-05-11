@@ -17,6 +17,7 @@ package android.support.v17.leanback.app;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;
+import android.support.annotation.RestrictTo;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
