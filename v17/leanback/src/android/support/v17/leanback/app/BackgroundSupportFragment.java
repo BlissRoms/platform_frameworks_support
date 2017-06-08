@@ -21,8 +21,6 @@ import android.support.annotation.RestrictTo;
 
 import static android.support.annotation.RestrictTo.Scope.GROUP_ID;
 
-import static android.support.annotation.RestrictTo.Scope.GROUP_ID;
-
 /**
  * Fragment used by the background manager.
  * @hide

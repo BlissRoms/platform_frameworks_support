@@ -97,10 +97,6 @@ public class BottomNavigationMenuView extends ViewGroup implements MenuView {
     @Override
     public void initialize(MenuBuilder menu) {
         mMenu = menu;
-        if (mMenu == null) return;
-        if (mMenu.size() > mActiveButton) {
-            mMenu.getItem(mActiveButton).setChecked(true);
-        }
     }
 
     @Override
