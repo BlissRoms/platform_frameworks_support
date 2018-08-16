@@ -37,7 +37,7 @@ import java.util.Arrays;
  */
 public final class Query {
 
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
     private static final String TAG = "Query";
 
     private final Uri mUri;
